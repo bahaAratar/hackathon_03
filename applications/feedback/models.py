@@ -29,3 +29,15 @@ class Rating(models.Model):
 
     def __str__(self) -> str:
         return f'{self.user} --> {self.product.name}'
+    
+class Favorite(models.Model):
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='favorites'
+    )
+    post = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='favorites'
+    )

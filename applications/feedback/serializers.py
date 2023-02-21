@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from applications.feedback.models import Comment, Rating
+from applications.feedback.models import Comment, Rating, Favorite
 
 class CommentSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.email')
@@ -13,4 +13,12 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating 
         fields = ('rating', )
+
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.email')
+
+    class Meta:
+        model = Favorite
+        fields = '__all__'
 
