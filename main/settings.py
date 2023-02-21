@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'django_rest_passwordreset',
 
     # my apps
     'applications.account',

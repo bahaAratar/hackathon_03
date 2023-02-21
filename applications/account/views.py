@@ -1,6 +1,7 @@
 from applications.account.serializers import RegisterSerializer, LoginSerializer
 from django.shortcuts import render
 from django.contrib.auth import get_user_model
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -27,6 +28,9 @@ class ActivationView(APIView):
             return Response({'msg': 'Успешно'}, status=200)
         except User.DoesNotExist:
             return Response({'msg': 'Link expired'}, status=400)
+        
+class ResetPasswordView(APIView):
+    pass
 
 class LoginAPIView(ObtainAuthToken):
     serializer_class = LoginSerializer
