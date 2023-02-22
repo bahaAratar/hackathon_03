@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import render
 from rest_framework import generics
 from .models import Contact
@@ -26,3 +28,7 @@ class ContactUpdate(generics.RetrieveUpdateAPIView):
 # class DeliveryAddressUpdate(generics.RetrieveUpdateAPIView):
 #     queryset = DeliveryAddress.objects.all()
 #     serializer_class = DeliveryAddressSerializer
+
+class ContactDelite(generics.DestroyAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
