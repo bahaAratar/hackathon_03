@@ -1,7 +1,10 @@
-from django.urls import path
-from .views import CardDetail, CardList,CardCreate,CardUpdate
+from django.urls import path, include
+from .views import CardViewSet
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('cards', CardViewSet)
 
 urlpatterns = [
-    path('cards/',CardList.as_view()),
-    path('del_upd/<int:pk>/', CardDetail.as_view()),
+    path('', include(router.urls)), 
 ]

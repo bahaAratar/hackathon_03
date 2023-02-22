@@ -1,20 +1,11 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import viewsets
 from .models import Product
 from .serializers import ProductSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-class ProductList(generics.ListAPIView):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-class ProductCreate(generics.CreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-class ProductUpdate(generics.UpdateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-
-class ProductDelite(generics.DestroyAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer

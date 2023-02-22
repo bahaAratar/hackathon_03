@@ -13,3 +13,6 @@ urlpatterns = [
     # path('password_reset/confirm/', ...),
     path('password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]
+
+# forgot password - email -> user.activation_code -> email
+# forgiot password confirc -> p1, p2, email, activation_code -> user.password = 

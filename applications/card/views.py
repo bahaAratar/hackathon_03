@@ -1,20 +1,10 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import viewsets
 from .models import Card
 from .serializers import CardSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-class CardList(generics.ListCreateAPIView):
-    queryset = Card.objects.all()
-    serializer_class =CardSerializer
-
-class CardDetail(generics.RetrieveUpdateDestroyAPIView):
+class CardViewSet(viewsets.ModelViewSet):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-
-class CardCreate(generics.CreateAPIView):
-    queryset = Card.objects.all()
-    serializer_class = CardSerializer
-
-class CardUpdate(generics.UpdateAPIView):
-    queryset = Card.objects.all()
-    serializer_class =CardSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
