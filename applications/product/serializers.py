@@ -25,7 +25,6 @@ class ProductSerializer(serializers.ModelSerializer):
         ProductImage.objects.bulk_create(image_objects)
 
         return product
-    
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
