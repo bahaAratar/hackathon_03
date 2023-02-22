@@ -61,12 +61,12 @@ class MyUser(AbstractUser):
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
 
-    email_plaintext_message = "{}{}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
+    # email_plaintext_message = "{}{}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
     send_mail(
         # title:
         "Password Reset for {title}".format(title="Some website title"),
         # message:
-        f'http://localhost:8000{email_plaintext_message} {instance.activation_code}',
+        f'введите этот код в строку token:\n{reset_password_token}',
         # from:
         "noreply@somehost.local",
         # to:
