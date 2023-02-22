@@ -26,3 +26,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
         return product
     
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
