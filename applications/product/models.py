@@ -15,7 +15,7 @@ class Product(models.Model):
     description = models.CharField(max_length=200)
     price = models.IntegerField()
     slug = models.SlugField(max_length=250)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products')
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='products', blank=True)
     tags = TaggableManager()
     published = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)

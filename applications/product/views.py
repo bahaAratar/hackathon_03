@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, serializers
 from .models import Product, ProductImage
 from applications.product.serializers import ProductSerializer, ProductImageSerializer
 from taggit.models import Tag
@@ -14,6 +14,7 @@ from .serializers import *
 class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def product_detail(request, year, month, day, product):
         product = get_object_or_404(Product, slug=product, status='published',publish__year=year,
@@ -31,19 +32,18 @@ class ProductModelViewSet(ModelViewSet):
             object_list = object_list.filter(tags__in=[tag])
         return render(request, 'product/list.html', {'products': object_list})
     
-class CreateImageAPIView(generics.CreateAPIView):
+class CreateImageAPIView(viewsets.ModelViewSet):
     queryset = ProductImage.objects.all()
     serializer_class = ProductImageSerializer
     permission_classes = [IsAuthenticated]
 
-class ContacttList(generics.ListAPIView):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-class ContactCreate(generics.CreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
+class CategorytViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-class ContactUpdate(generics.UpdateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
