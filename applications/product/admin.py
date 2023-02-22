@@ -17,5 +17,3 @@ class PostAdmin(admin.ModelAdmin):
     search_fields = ('name', )
     prepopulated_fields = {'slug': ('name',)}
     raw_id_fields = ('owner',)
-
-
