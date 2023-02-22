@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # modules
     'rest_framework',
+    'taggit',
     # 'rest_framework.authtoken',
     'django_filters',
     'drf_yasg',
