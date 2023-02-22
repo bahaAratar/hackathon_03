@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from applications.account.send_email import send_activation_code
@@ -54,3 +55,13 @@ class LoginSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+    
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
