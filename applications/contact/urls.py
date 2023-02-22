@@ -1,9 +1,11 @@
-from django.urls import path
-from .views import ContactCreate, ContactList, ContactUpdate,ContactDelite
+from django.urls import path,include
+from .views import ContactViewSet 
+from rest_framework.routers import DefaultRouter
+
+
+router = DefaultRouter()
+router.register('contacts', ContactViewSet)
 
 urlpatterns = [
-    path('contacts/',ContactList.as_view()),
-    path('contacts/<int:pk>/', ContactCreate.as_view()),
-    path('contacts/<int:pk>/', ContactUpdate.as_view()),
-    path('contacts/<int:pk>/', ContactDelite.as_view())
+    path('', include(router.urls)),
 ]

@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from applications.account.send_email import send_activation_code
 from .models import MyUser
+
 User = get_user_model() # CustomUSer
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -55,7 +56,7 @@ class LoginSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
-
+    
 class ChangePasswordSerializer(serializers.Serializer):
     model = User
 

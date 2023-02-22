@@ -1,34 +1,13 @@
 
 
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import viewsets
 from .models import Contact
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .serializers import ContactSerializer
 
-class ContactList(generics.ListAPIView):
+class ContactViewSet(viewsets.ModelViewSet): # post , get
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-# class DeliveryAddressList(generics.ListAPIView):
-#     queryset = DeliveryAddress.objects.all()
-#     serializer_class = DeliveryAddressSerializer
-
-class ContactCreate(generics.CreateAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
-
-# class DeliveryAddressCreate(generics.CreateAPIView):
-#     queryset = DeliveryAddress.objects.all()
-#     serializer_class = DeliveryAddressSerializer
-
-class ContactUpdate(generics.RetrieveUpdateAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
-
-# class DeliveryAddressUpdate(generics.RetrieveUpdateAPIView):
-#     queryset = DeliveryAddress.objects.all()
-#     serializer_class = DeliveryAddressSerializer
-
-class ContactDelite(generics.DestroyAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
