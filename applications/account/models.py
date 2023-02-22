@@ -66,7 +66,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         # title:
         "Password Reset for {title}".format(title="Some website title"),
         # message:
-        f'http://localhost:8000{email_plaintext_message}',
+        f'http://localhost:8000{email_plaintext_message} {instance.activation_code}',
         # from:
         "noreply@somehost.local",
         # to:
