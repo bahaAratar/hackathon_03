@@ -1,9 +1,15 @@
 from django.db import models
 
+
+User = get_user_model()
+
 class Product(models.Model):
-    name = models.CharField(unique=True, max_length=200)
+    STATUS_CHOICES = (
+        ('draft', 'Draft'),
+        ('published', 'Published'),
+ )
+    name = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
-    image = models.ImageField(null=True, blank=True)
     price = models.IntegerField()
 
 class Category(models.Model):
