@@ -10,6 +10,10 @@ from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
+# from rest_framework import generics
+from .models import MyUser
+from .serializers import MyUserSerializer
 
 User = get_user_model()
 
@@ -82,3 +86,10 @@ class ChangePasswordView(generics.UpdateAPIView):
             return Response(response)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class MyUsertList(generics.ListCreateAPIView):
+    queryset = MyUser.objects.all()
+    serializer_class = MyUserSerializer
+
+class MyUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MyUser.objects.all()
+    serializer_class = MyUserSerializer
