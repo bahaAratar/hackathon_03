@@ -7,6 +7,9 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework import viewsets
+from .models import *
+from .serializers import *
 
 class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
