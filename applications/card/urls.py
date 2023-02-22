@@ -3,7 +3,5 @@ from .views import CardDetail, CardList,CardCreate,CardUpdate
 
 urlpatterns = [
     path('cards/',CardList.as_view()),
-    path('del_upd/<int:pk>/', CardDetail.as_view()),
+    path('card/<int:pk>/', CardDetail.as_view()),
 ]
-
-

@@ -18,4 +18,3 @@ class CardCreate(generics.CreateAPIView):
 class CardUpdate(generics.UpdateAPIView):
     queryset = Card.objects.all()
     serializer_class =CardSerializer
-

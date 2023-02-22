@@ -7,4 +7,3 @@ urlpatterns = [
     path('prosuct/<int:pk>/',ProductUpdate.as_view()),
     path('product/<int:pk>/', ProductDelite.as_view())
 ]
-
