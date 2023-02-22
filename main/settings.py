@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,12 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(la!+@!r&e&wohp*9mr)d0jj2m^%i060zjbpjgd4tr%+)z@cqo'
+SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = ('localhost', '127.0.0.1')
-
+ALLOWED_HOSTS = config('ALLOWED_HOSTS').split(',')
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_filters',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'django_rest_passwordreset',
 
     # my apps
     'applications.account',
@@ -92,9 +93,9 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'zaebalo',
-        'USER': 'hello',
-        'PASSWORD': '1',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -148,18 +149,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_PASSWORD = 'pgskhqgbdwdzcmor'
-EMAIL_HOST_USER = 'lucifercommander@gmail.com'
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+
     ],
+    # 'DEFAULT_PAGINATION_CLASS':
+    #     'rest_framework.pagination.LimitOffsetPagination',
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 50,
     
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination', 
-    
-    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination', 
-    # 'PAGE_SIZE': 1,
 }
 
 
