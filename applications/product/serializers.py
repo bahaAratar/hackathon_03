@@ -14,7 +14,6 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-
     def create(self, validated_data):
         product = Product.objects.create(**validated_data)
         request = self.context.get('request')
@@ -25,6 +24,7 @@ class ProductSerializer(serializers.ModelSerializer):
         ProductImage.objects.bulk_create(image_objects)
 
         return product
+    
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
