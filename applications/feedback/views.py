@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import mixins
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.pagination import PageNumberPagination
 
 class CommentModelViewSet(ModelViewSet):
     queryset = Comment.objects.all()
