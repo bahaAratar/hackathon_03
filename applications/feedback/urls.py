@@ -11,7 +11,6 @@ router.register('comment', CommentModelViewSet)
 router.register('rating', RatingModelViewSet)
 router.register('favorit', FavoriteModelViewSet)
 
-
 urlpatterns = [
     path('', include(router.urls)),
 ]
