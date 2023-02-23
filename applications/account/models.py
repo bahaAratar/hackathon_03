@@ -58,10 +58,19 @@ class MyUser(AbstractUser):
         code = str(uuid.uuid4())
         self.activation_code = code
 
+class ResetPassword(models.Model):
+    email = models.EmailField()
+    key = models.CharField(max_length=50, blank=True)
+
+    def create_activation_code(self):
+        import uuid
+
+        code = str(uuid.uuid4())
+        self.key = code
+
+
 @receiver(reset_password_token_created)
 def password_reset_token_created(sender, instance, reset_password_token, *args, **kwargs):
-
-    # email_plaintext_message = "{}{}".format(reverse('password_reset:reset-password-request'), reset_password_token.key)
     send_mail(
         # title:
         "Password Reset for {title}".format(title="Some website title"),

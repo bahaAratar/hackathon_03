@@ -72,3 +72,17 @@ class MyUserSerializer(serializers.ModelSerializer):
         model = MyUser
         fields = '__all__'
 
+# class ResetPasswordSerializer(serializers.ModelSerializer):
+    
+#     def validate_email(self, email):
+#         if User.objects.filter(email=email).exists():
+#             return email
+#         raise serializers.ValidationError('пользователь не найден')
+
+#     def create(self, validated_data):
+#         user = ...
+#         return user
+
+#     class Meta:
+#         model = ResetPassword
+#         fields = '__all__'

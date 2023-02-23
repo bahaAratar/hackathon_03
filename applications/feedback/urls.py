@@ -7,8 +7,9 @@ from applications.product.views import *
 router = DefaultRouter()
 # router.register('comments', CommentViewSet, basename='comment')
 router.register('comment', CommentModelViewSet)
+
 router.register('rating', RatingModelViewSet)
-router.register('', FavoriteModelViewSet)
+router.register('favorit', FavoriteModelViewSet)
 
 
 urlpatterns = [

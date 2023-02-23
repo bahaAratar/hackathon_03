@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from applications.product.permissions import IsOwner
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
@@ -16,7 +17,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwner]
 
     def product_detail(request, year, month, day, product):
         product = get_object_or_404(Product, slug=product, status='published',publish__year=year,
@@ -46,7 +47,7 @@ class CreateImageAPIView(viewsets.ModelViewSet):
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwner]
 
 class CategorytViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()

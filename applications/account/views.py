@@ -12,7 +12,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import MyUser
+from .models import MyUser, ResetPassword
 from .serializers import MyUserSerializer
 
 User = get_user_model()
@@ -36,8 +36,15 @@ class ActivationView(APIView):
         except User.DoesNotExist:
             return Response({'msg': 'Link expired'}, status=400)
         
-class ResetPasswordView(APIView):
-    pass
+# class ResetPasswordView(APIView):
+#     def post(self, request, key):
+#         try:
+#             passw = ResetPassword.objects.get(key=key)
+#             passw.key = ''
+#             passw.save()
+#             return Response({'msg': 'ok'}, status=200)
+#         except ResetPassword.DoesNotExist:
+#             return Response({'msg': 'error'}, status=400)
 
 class LoginAPIView(ObtainAuthToken):
     serializer_class = LoginSerializer
@@ -58,7 +65,7 @@ class ChangePasswordView(generics.UpdateAPIView):
     """
     serializer_class = ChangePasswordSerializer
     model = User
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, )
 
     def get_object(self, queryset=None):
         obj = self.request.user

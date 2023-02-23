@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import mixins
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.pagination import PageNumberPagination
 
 class CommentModelViewSet(ModelViewSet):
     queryset = Comment.objects.all()
@@ -20,10 +21,12 @@ class CommentModelViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+
 class RatingModelViewSet(ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
-    pagination_class = [IsAuthenticatedOrReadOnly]
+    pagination_class = PageNumberPagination
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)

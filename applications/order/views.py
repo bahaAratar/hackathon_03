@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import Order
 from .serializers import OrderSerializer
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -29,3 +30,11 @@ class OrderCreateView(APIView):
     filterset_fields = ['user', 'items']
     search_fields = ['items']
     ordering_fields = ['id']
+
+class OrderHistoryView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        orders = Order.objects.filter(user=request.user)
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)

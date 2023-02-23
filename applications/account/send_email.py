@@ -8,10 +8,10 @@ def send_activation_code(email, code):
         [email] # to
     )
 
-# def send_reset_password(email, code):
-#     send_mail(
-#         'py25 account project', # title
-#         f'http://localhost:8000/account/activate/{code}', # body
-#         'dead.baha.31@gmail.com', # from
-#         [email] # to
-#     )
+def send_reset_password(email, code):
+    send_mail(
+        'py25 account project', # title
+        f'http://localhost:8000/account/activate/{code}', # body
+        'dead.baha.31@gmail.com', # from
+        [email] # to
+    )
