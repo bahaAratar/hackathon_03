@@ -8,8 +8,10 @@ router = DefaultRouter()
 router.register('comment', CommentModelViewSet)
 router.register('rating', RatingModelViewSet)
 router.register('', FavoriteModelViewSet)
+router.register('like', LikeModelViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('like/' ,include(router.urls))
 
 ]
