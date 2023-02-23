@@ -7,11 +7,9 @@ router = DefaultRouter()
 # router.register('comments', CommentViewSet, basename='comment')
 router.register('comment', CommentModelViewSet)
 router.register('rating', RatingModelViewSet)
-router.register('', FavoriteModelViewSet)
+router.register('favorite', FavoriteModelViewSet)
 router.register('like', LikeModelViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('like/' ,include(router.urls))
-
 ]
