@@ -10,6 +10,8 @@ from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnl
 from rest_framework import viewsets
 from .models import *
 from .serializers import *
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 class ProductModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
@@ -31,6 +33,10 @@ class ProductModelViewSet(ModelViewSet):
             tag = get_object_or_404(Tag, slug=tag_slug)
             object_list = object_list.filter(tags__in=[tag])
         return render(request, 'product/list.html', {'products': object_list})
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['owner', 'name', 'price', 'status']
+    search_fields = ['product']
+    ordering_fields = ['id']
     
 class CreateImageAPIView(viewsets.ModelViewSet):
     queryset = ProductImage.objects.all()

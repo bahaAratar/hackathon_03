@@ -66,7 +66,7 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
         # title:
         "Password Reset for {title}".format(title="Some website title"),
         # message:
-        f'введите этот код в строку token:\n{reset_password_token}',
+        f'перейдите по этому пути и введите новый пароль и токен:\nhttp://localhost:8000/account/password_reset/confirm/ \n{reset_password_token.key}',
         # from:
         "noreply@somehost.local",
         # to:

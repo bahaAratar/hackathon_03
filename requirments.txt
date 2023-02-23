@@ -7,3 +7,4 @@ pillow
 drf-yasg
 djangorestframework-simplejwt
 django-taggit
+django-rest-passwordreset

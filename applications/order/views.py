@@ -5,6 +5,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import Order
 from .serializers import OrderSerializer
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 
 class OrderCreateView(APIView):
     def post(self, request):
@@ -22,3 +24,8 @@ class OrderCreateView(APIView):
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['user', 'items']
+    search_fields = ['items']
+    ordering_fields = ['id']
