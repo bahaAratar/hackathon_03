@@ -5,8 +5,8 @@
 # from .models import Like
 
 from django.shortcuts import render
-from applications.feedback.models import *
-from applications.feedback.serializers import *
+from applications.feedback.models import Comment, Rating, Favorite
+from applications.feedback.serializers import CommentSerializer, RatingSerializer, FavoriteSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import mixins
@@ -21,7 +21,6 @@ class CommentModelViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-from rest_framework.pagination import PageNumberPagination
 
 class RatingModelViewSet(ModelViewSet):
     queryset = Rating.objects.all()
@@ -48,8 +47,3 @@ class FavoriteModelViewSet(mixins.CreateModelMixin,
         queryset = super().get_queryset()
         queryset = queryset.filter(owner=self.request.user)
         return queryset
-class LikeModelViewSet(ModelViewSet):
-    queryset = Like.objects.all()
-    serializer_class = LikeSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
-
