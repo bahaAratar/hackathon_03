@@ -14,4 +14,4 @@ class CardViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ['user', 'product']
     search_fields = ['product']
-    ordering_fields = ['id']
+    ordering_fields = ['id'] 

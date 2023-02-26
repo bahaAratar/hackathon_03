@@ -24,6 +24,16 @@ class ProductSerializer(serializers.ModelSerializer):
         ProductImage.objects.bulk_create(image_objects)
 
         return product
+    
+    # def to_representation(self, instance):
+    #     representation =  super().to_representation(instance)
+
+    #     representation['price'] = instance.likes.filter(is_like=True).count()
+    #     for like in representation['likes']:
+    #         representation['price'] = instance.ratings.all().aggregate(sum('price'))
+
+    #     return representation
+    
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category

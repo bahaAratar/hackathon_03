@@ -1,7 +1,6 @@
-# from django.contrib.auth.models import User
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
-from applications.account.send_email import send_activation_code
+from django.core.mail import send_mail  
 from .models import MyUser
 
 User = get_user_model() # CustomUSer
@@ -33,7 +32,13 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validate_data):
         user = User.objects.create_user(**validate_data) 
-        send_activation_code(user.email, user.activation_code)
+        # send_activation_code(user.email, user.activation_code)
+        send_mail(
+            'py25 account project', # title
+            f'http://localhost:8000/account/activate/{user.activation_code}', # body
+            'dead.baha.31@gmail.com', # from
+            [user.email] # to
+        )
         return user
         
 class LoginSerializer(serializers.Serializer):

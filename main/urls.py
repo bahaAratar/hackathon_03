@@ -34,8 +34,8 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('swagger/',schema_view.with_ui('swagger')),
-
-    path('account/', include('applications.account.urls')),
+    # path('', cache_page(60)(WomenHome.as_view()), name='home'),
+    path('account/',include('applications.account.urls')),
     path('card/', include('applications.card.urls')),
     path('contact/', include('applications.contact.urls')),
     path('order/', include('applications.order.urls')),

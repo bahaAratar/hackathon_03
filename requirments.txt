@@ -8,3 +8,8 @@ drf-yasg
 djangorestframework-simplejwt
 django-taggit
 django-rest-passwordreset
+
+pyTelegramBotAPI
+requests
+beautifulsoup4
+lxml
